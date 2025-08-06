@@ -1,103 +1,167 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { motion } from "motion/react";
+import { GoogleGeminiEffectDemo } from "./_components/GeminiEffectDemo";
+import { LampFooterLandingPage } from "./_components/LampFooterLandingPage";
+import { UserButton, useUser } from "@clerk/nextjs";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { WatchVideoButton } from "./_components/WatchVideoButton";
+
+export default function HeroSectionOne() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+    <div className="relative flex flex-col items-center justify-center">
+      <Navbar />
+      <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute top-0 h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
+      </div>
+      <div className="absolute inset-y-0 right-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute h-40 w-px bg-gradient-to-b from-transparent via-blue-500 to-transparent" />
+      </div>
+      <div className="absolute inset-x-0 bottom-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute mx-auto h-px w-40 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+      </div>
+      <div className="px-4 py-10 md:py-20">
+        <h1 className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-7xl dark:text-slate-300">
+          {"🗣️ Natural Conversations. Clinical Precision 🩺"
+            .split(" ")
+            .map((word, index) => (
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
+                animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: index * 0.1,
+                  ease: "easeInOut",
+                }}
+                className="mr-2 inline-block"
+              >
+                {word}
+              </motion.span>
+            ))}
+        </h1>
+        <motion.p
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            duration: 0.3,
+            delay: 0.8,
+          }}
+          className="relative z-10 mx-auto max-w-xl py-4 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400"
+        >
+          Mediecho is your AI-powered medical voice assistant that speaks like a
+          real doctor. It listens carefully, asks the right follow-up questions,
+          and responds with clinical expertise—so patients feel heard,
+          understood, and supported, 24/7.
+        </motion.p>
+        <motion.div
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          transition={{
+            duration: 0.3,
+            delay: 1,
+          }}
+          className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4"
+        >
+          <Link href={"/sign-in"}>
+            <button className="w-60 cursor-pointer transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+              Get Started
+            </button>
+          </Link>
+          {/* ▶️ Watch Video Button */}
+          <WatchVideoButton />
+        </motion.div>
+        {/* <motion.div
+          initial={{
+            opacity: 0,
+            y: 10,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.3,
+            delay: 1.2,
+          }}
+          className="relative z-10 mt-20 rounded-3xl border border-neutral-200 bg-neutral-100 p-4 shadow-md dark:border-neutral-800 dark:bg-neutral-900"
+        >
+          <div className="w-full overflow-hidden rounded-xl border border-gray-300 dark:border-gray-700">
+            <img
+              src="https://assets.aceternity.com/pro/aceternity-landing.webp"
+              alt="Landing page preview"
+              className="aspect-[16/9] h-auto w-full object-cover"
+              height={1000}
+              width={1000}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          </div>
+        </motion.div> */}
+      </div>
+
+      <GoogleGeminiEffectDemo />
+
+      <div className="w-[100%]">
+        <LampFooterLandingPage />
+      </div>
     </div>
   );
 }
+
+const Navbar = () => {
+  const { user } = useUser();
+
+  return (
+    <nav className="flex w-full shadow-md items-center justify-between border-t border-b border-neutral-200 px-5 py-5 dark:border-neutral-800">
+      <Link href={"/"}>
+        <div className="flex items-center gap-2">
+          <div className="size-7 rounded-full bg-gradient-to-r from-emerald-100 to-emerald-600 animate-spin" />
+          <h1 className="text-base font-bold md:text-2xl">Mediecho AI</h1>
+        </div>
+      </Link>
+      {!user ? (
+        <Link href={"/sign-in"}>
+          <button className="w-24 cursor-pointer transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:bg-gray-800 md:w-32 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+            Login
+          </button>
+        </Link>
+      ) : (
+        <div className="flex items-center gap-5">
+          <div className="hidden md:block">
+            <UserButton
+              appearance={{
+                elements: {
+                  userButtonAvatarBox: {
+                    width: "40px",
+                    height: "40px",
+                  },
+                },
+              }}
+            />
+          </div>
+          <Link href={"/dashboard"}>
+            <button className="group cursor-pointer relative w-full sm:w-40 overflow-hidden rounded-xl bg-slate-950 px-4 sm:px-6 py-2 text-center text-white font-semibold shadow-lg transition-all duration-300 hover:shadow-slate-500/50 dark:text-white text-sm sm:text-base">
+              {/* Background gloss layer */}
+              <span className="absolute inset-0 z-0 bg-gradient-to-tr from-white/20 via-transparent to-white/10 opacity-10 group-hover:opacity-20 transition-opacity duration-500"></span>
+
+              {/* Fancy border glow on hover */}
+              <span className="absolute -inset-1 z-0 rounded-xl bg-gradient-to-br from-slate-400/40 via-slate-500/30 to-transparent opacity-0 blur-md transition-all duration-500 group-hover:opacity-100"></span>
+
+              {/* Text on top */}
+              <span className="relative z-10 tracking-wide">Dashboard</span>
+            </button>
+          </Link>
+        </div>
+      )}
+    </nav>
+  );
+};
