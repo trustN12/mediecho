@@ -276,26 +276,26 @@ const MedicalVoiceAgent = () => {
       </div>
       {sessionDetail && (
         <div className="flex items-center flex-col mt-10">
-          <div className="relative flex items-center justify-center w-full max-w-[220px] aspect-square mx-auto">
-            {/* Neon radial ambient background glow */}
-            <div className="absolute inset-0 z-0 rounded-full bg-gradient-radial from-emerald-400/30 via-emerald-600/20 to-transparent blur-2xl animate-pulse" />
+          <div className="relative w-full max-w-[160px] sm:max-w-[180px] md:max-w-[200px] lg:max-w-[220px] aspect-square mx-auto">
+            {/* Neon ambient background glow */}
+            <div className="absolute inset-0 z-0 rounded-full bg-[radial-gradient(circle_at_center,_rgba(34,211,153,0.2),_transparent_70%)] blur-2xl pointer-events-none" />
 
             {/* Voice wave rings */}
             {isSpeaking && (
               <>
-                <span className="absolute h-full w-full rounded-full border border-emerald-400 animate-pingFast" />
-                <span className="absolute h-[140%] w-[140%] rounded-full border border-emerald-500 animate-pingSlow opacity-50" />
-                <span className="absolute h-[180%] w-[180%] rounded-full border border-emerald-500/20 animate-pingSlower" />
+                <span className="absolute inset-0 rounded-full border border-emerald-400 animate-pingFast pointer-events-none" />
+                <span className="absolute inset-0 scale-[1.1] rounded-full border border-emerald-500 animate-pingSlow opacity-40 pointer-events-none" />
+                <span className="absolute inset-0 scale-[1.2] rounded-full border border-emerald-500/20 animate-pingSlower pointer-events-none" />
               </>
             )}
 
-            {/* Avatar with neon speak glow */}
+            {/* Avatar */}
             <div
-              className={`relative z-10 h-[120px] w-[120px] rounded-full overflow-hidden transition-all duration-300 shadow-[0_0_80px_rgba(34,211,153,0.3)]
+              className={`relative z-10 w-[80%] h-[80%] mx-auto rounded-full overflow-hidden transition-all duration-300
       ${
         isSpeaking
-          ? "ring-4 ring-emerald-400/80 animate-neonSpeak shadow-[0_0_120px_rgba(52,211,153,0.6)]"
-          : "ring-2 ring-gray-300"
+          ? "ring-4 ring-emerald-400/80 animate-neonSpeak shadow-[0_0_100px_rgba(52,211,153,0.5)]"
+          : "ring-2 ring-gray-300 shadow-md"
       }
     `}
             >
@@ -313,7 +313,7 @@ const MedicalVoiceAgent = () => {
             {sessionDetail?.selectedDoctor?.specialist}
           </h2>
           <p className="text-sm text-gray-400">Your AI Medical Doctor</p>
-          <div className="mt-12 w-full max-w-4xl h-[200px] md:h-[240px] lg:h-[380px] xl:h-[400px] overflow-y-auto rounded-2xl backdrop-blur-md bg-white/60 border border-gray-200 shadow-inner px-4 py-6 space-y-4 transition-all duration-300 scroll-smooth">
+          <div className="mt-12 w-full max-w-5xl min-w-[240px] min-h-[250px] max-h-[80vh] md:h-[290px] lg:h-[380px] xl:h-[400px] overflow-y-auto rounded-2xl backdrop-blur-md bg-white/60 border border-gray-200 shadow-inner px-4 py-6 space-y-4 transition-all duration-300 scroll-smooth">
             {/* Show before call starts if no messages */}
             {!callStarted && messages.length === 0 && !liveTranscript && (
               <div className="w-full h-full flex items-center justify-center">

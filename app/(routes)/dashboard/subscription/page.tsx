@@ -372,33 +372,34 @@ const Subscription = () => {
                   <span className="text-2xl font-bold">₹499</span>
                   <span className="text-sm text-gray-500">
                     {" "}
-                    /month (billed yearly)
+                    /month<span className="text-[10px] text-emerald-800 text-center"> (*billed annually)</span>
                   </span>
                 </>
               )}
             </div>
 
             {/* Toggle */}
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-sm font-medium">
+
               <span
-                className={`text-sm font-medium ${
+                className={
                   billingCycle === "monthly"
                     ? "text-emerald-600"
                     : "text-gray-400"
-                }`}
+                }
               >
                 Monthly
               </span>
 
               <button
-                className={`cursor-pointer w-12 h-6 flex items-center rounded-full transition-colors duration-300 ${
-                  billingCycle === "annually" ? "bg-emerald-500" : "bg-gray-300"
-                }`}
                 onClick={() =>
                   setBillingCycle(
                     billingCycle === "monthly" ? "annually" : "monthly"
                   )
                 }
+                className={`w-12 h-6 flex items-center rounded-full transition-colors duration-300 ${
+                  billingCycle === "annually" ? "bg-emerald-500" : "bg-gray-300"
+                }`}
               >
                 <span
                   className={`w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
@@ -410,11 +411,11 @@ const Subscription = () => {
               </button>
 
               <span
-                className={`text-sm font-medium ${
+                className={
                   billingCycle === "annually"
                     ? "text-emerald-600"
                     : "text-gray-400"
-                }`}
+                }
               >
                 Annually
               </span>
@@ -441,7 +442,7 @@ const Subscription = () => {
               ? "Processing..."
               : billingCycle === "monthly"
               ? "Subscribe ₹599/mo"
-              : "Subscribe ₹499/mo (yearly)"}
+              : "Subscribe ₹499/mo"}
           </button>
         </div>
       </div>
