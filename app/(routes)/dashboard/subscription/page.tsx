@@ -219,7 +219,7 @@ const Subscription = () => {
   const [userPlan, setUserPlan] = useState<"pro" | "free" | null>(null);
   const [isPro, setIsPro] = useState<boolean | null>(null); // Optional: you can fetch from API
 
-  const price = billingCycle === "monthly" ? 59900 : 49900 * 12;
+  const price = billingCycle === "monthly" ? 69900 : 59900 * 12;
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -337,8 +337,8 @@ const Subscription = () => {
           </div>
 
           <ul className="text-sm text-gray-700 list-disc list-inside space-y-2 mb-6">
-            <li>Total 5 medical consultations & reports</li>
-            <li>2 AI medical agents</li>
+            <li>1 medical consultation</li>
+            <li>1 AI medical agent</li>
             <li>Limited features</li>
             <li>No priority support</li>
           </ul>
@@ -364,12 +364,12 @@ const Subscription = () => {
             <div>
               {billingCycle === "monthly" ? (
                 <>
-                  <span className="text-2xl font-bold">₹599</span>
+                  <span className="text-2xl font-bold">₹699</span>
                   <span className="text-sm text-gray-500"> /month</span>
                 </>
               ) : (
                 <>
-                  <span className="text-2xl font-bold">₹499</span>
+                  <span className="text-2xl font-bold">₹599</span>
                   <span className="text-sm text-gray-500">
                     {" "}
                     /month<span className="text-[10px] text-emerald-800 text-center"> (*billed annually)</span>
@@ -423,8 +423,8 @@ const Subscription = () => {
           </div>
 
           <ul className="text-sm text-gray-700 list-disc list-inside space-y-2 mb-6">
-            <li>30 AI medical consultations & reports/month</li>
-            <li>All AI medical agents unlocked</li>
+            <li>10 AI medical consultations/month</li>
+            <li>Unlocked all AI medical agents</li>
             <li>Priority & email support</li>
             <li>Early access to features</li>
             <li>
@@ -441,8 +441,8 @@ const Subscription = () => {
             {loading
               ? "Processing..."
               : billingCycle === "monthly"
-              ? "Subscribe ₹599/mo"
-              : "Subscribe ₹499/mo"}
+              ? "Subscribe ₹699/mo"
+              : "Subscribe ₹599/mo"}
           </button>
         </div>
       </div>

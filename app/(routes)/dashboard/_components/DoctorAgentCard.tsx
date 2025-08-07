@@ -82,16 +82,16 @@ const DoctorAgentCard = ({ doctorAgent, credits }: props) => {
   const isLocked = doctorAgent.subscriptionRequired && isPro === false;
 
   const onStartConsultation = async () => {
-    if (!paidUser && historyList?.length >= 5) {
-      // toast.warning("Free limit reached. Please upgrade to Pro to continue.");
-      toast.warning("You have 0 credits left. Please upgrade to continue.", {
-        style: {
-          background: "#dc2626", // Tailwind red-600
-          color: "white",
-        },
-      });
-      return;
-    }
+    // if (!paidUser && historyList?.length >= 5) {
+    //   // toast.warning("Free limit reached. Please upgrade to Pro to continue.");
+    //   toast.warning("You have 0 credits left. Please upgrade to continue.", {
+    //     style: {
+    //       background: "#dc2626", // Tailwind red-600
+    //       color: "white",
+    //     },
+    //   });
+    //   return;
+    // }
 
     if (credits !== null && credits <= 0) {
       toast.warning("You have 0 credits left. Please upgrade to continue.", {
@@ -158,20 +158,20 @@ const DoctorAgentCard = ({ doctorAgent, credits }: props) => {
     },
   };
 
-  function showPenguinToast({
-    variant = "info", // info | success | warning | danger | message
-    title = "",
-    message = "",
-    sender = null, // Only used for 'message' variant
-  }) {
-    if (typeof window === "undefined") return;
+  // function showPenguinToast({
+  //   variant = "info", // info | success | warning | danger | message
+  //   title = "",
+  //   message = "",
+  //   sender = null, // Only used for 'message' variant
+  // }) {
+  //   if (typeof window === "undefined") return;
 
-    const event = new CustomEvent("notify", {
-      detail: { variant, title, message, sender },
-    });
+  //   const event = new CustomEvent("notify", {
+  //     detail: { variant, title, message, sender },
+  //   });
 
-    window.dispatchEvent(event);
-  }
+  //   window.dispatchEvent(event);
+  // }
 
   return (
     <motion.div

@@ -9,7 +9,7 @@ const razorpay = new Razorpay({
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const amount = body.amount ?? 59900; // fallback to 59900 // ₹599
+  const amount = body.amount ?? 69900; // fallback to 69900 // ₹699
   const options = {
     amount,
     currency: "INR",

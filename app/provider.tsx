@@ -23,11 +23,26 @@ const Provider = ({
     user && CreateNewUser();
   }, [user]);
 
+  // const CreateNewUser = async () => {
+  //   const result = await axios.post("/api/users");
+  //   // console.log(result.data);
+  //   setUserDetail(result.data);
+  // };
+
   const CreateNewUser = async () => {
-    const result = await axios.post("/api/users");
-    // console.log(result.data);
+    if (!user) return;
+  
+    const result = await axios.post("/api/users", {
+      userId: user.id,
+      name: user.fullName,
+      email: user.emailAddresses[0]?.emailAddress,
+      imageUrl: user.imageUrl,
+    });
+  
     setUserDetail(result.data);
   };
+  
+
 
   return (
     <div>

@@ -4,27 +4,63 @@ import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { eq, sql } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
+// export async function POST(req: NextRequest) {
+//   const user = await currentUser();
+
+//   try {
+//     //  check if user already exist
+//     const users = await db
+//       .select()
+//       .from(usersTable)
+//       //@ts-ignore
+//       .where(eq(usersTable.email, user?.primaryEmailAddress?.emailAddress));
+
+//     // if not then create new user
+//     if (users?.length == 0) {
+//       const result = await db
+//         .insert(usersTable)
+//         .values({
+//           //@ts-ignore
+//           name: user?.fullName,
+//           email: user?.primaryEmailAddress?.emailAddress,
+//           credits: 1,
+//         }) //@ts-ignore
+//         .returning({ usersTable });
+
+//       return NextResponse.json(result[0]?.usersTable);
+//     }
+
+//     return NextResponse.json(users[0]);
+//   } catch (error) {
+//     return NextResponse.json(error);
+//   }
+// }
+
+
 export async function POST(req: NextRequest) {
-  const user = await currentUser();
+  const body = await req.json();
+  const { userId, name, email, imageUrl } = body;
 
   try {
-    //  check if user already exist
+    // Check if user already exists
     const users = await db
       .select()
       .from(usersTable)
-      //@ts-ignore
-      .where(eq(usersTable.email, user?.primaryEmailAddress?.emailAddress));
+      .where(eq(usersTable.email, email));
 
-    // if not then create new user
-    if (users?.length == 0) {
+    // If not, create a new user
+    if (users?.length === 0) {
       const result = await db
-        .insert(usersTable)
+        .insert(usersTable) 
+        // @ts-ignore
         .values({
-          //@ts-ignore
-          name: user?.fullName,
-          email: user?.primaryEmailAddress?.emailAddress,
-          credits: 5,
-        }) //@ts-ignore
+          name,
+          email,
+          credits: 1,
+          imageUrl,
+          userId,
+        }) 
+        // @ts-ignore
         .returning({ usersTable });
 
       return NextResponse.json(result[0]?.usersTable);
@@ -32,9 +68,13 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(users[0]);
   } catch (error) {
+    console.error("Error creating user:", error);
     return NextResponse.json(error);
   }
 }
+
+
+
 
 export async function GET(req: NextRequest) {
   const user = await currentUser();
@@ -211,7 +251,7 @@ export async function PATCH(req: NextRequest) {
         .set({
           plan: "pro",
           subscriptionType,
-          credits: 30,
+          credits: 10,
           lastCreditRefill: now.toISOString().split("T")[0],
           subscriptionEndsOn: endsOn.toISOString().split("T")[0],
         })
@@ -253,7 +293,7 @@ export async function PATCH(req: NextRequest) {
       await db
         .update(usersTable)
         .set({
-          credits: 30,
+          credits: 10,
           lastCreditRefill: today,
         })
         //@ts-ignore
