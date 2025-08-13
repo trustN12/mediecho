@@ -110,7 +110,7 @@ export const LampContainer = ({
 
             <div className="flex flex-row items-center gap-3">
               <a
-                href="https://facebook.com/n.biswas.144"
+                href="https://facebook.com/profile.php?id=100057557126240"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition hover:text-[#1877f2]" // Facebook blue
@@ -122,6 +122,7 @@ export const LampContainer = ({
                 className="transition hover:text-green-400"
               >
                 <Phone size={20} />
+                
               </a>
             </div>
           </div>
